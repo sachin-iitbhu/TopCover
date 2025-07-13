@@ -19,6 +19,9 @@ function App() {
   const [eliminatedPlayers, setEliminatedPlayers] = useState<Player[]>([]);
   const [winner, setWinner] = useState<Role | null>(null);
   const [mrWhiteGuess, setMrWhiteGuess] = useState("");
+  const [mrWhiteWinType, setMrWhiteWinType] = useState<
+    "guess" | "survival" | null
+  >(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   const resetGame = () => {
@@ -30,6 +33,7 @@ function App() {
     setEliminatedPlayers([]);
     setWinner(null);
     setMrWhiteGuess("");
+    setMrWhiteWinType(null);
   };
 
   const playAgainWithSamePlayers = () => {
@@ -48,6 +52,7 @@ function App() {
     setEliminatedPlayers([]);
     setWinner(null);
     setMrWhiteGuess("");
+    setMrWhiteWinType(null);
   };
 
   return (
@@ -110,6 +115,7 @@ function App() {
             civilianWord={civilianWord}
             mrWhiteGuess={mrWhiteGuess}
             setMrWhiteGuess={setMrWhiteGuess}
+            setMrWhiteWinType={setMrWhiteWinType}
           />
         )}
 
@@ -120,6 +126,7 @@ function App() {
             eliminatedPlayers={eliminatedPlayers}
             civilianWord={civilianWord}
             undercoverWord={undercoverWord}
+            mrWhiteWinType={mrWhiteWinType}
             onPlayAgain={playAgainWithSamePlayers}
             onNewGame={resetGame}
           />

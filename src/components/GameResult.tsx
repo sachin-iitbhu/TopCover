@@ -8,6 +8,7 @@ interface GameResultProps {
   eliminatedPlayers: Player[];
   civilianWord: string;
   undercoverWord: string;
+  mrWhiteWinType: "guess" | "survival" | null;
   onPlayAgain: () => void;
   onNewGame: () => void;
 }
@@ -18,6 +19,7 @@ const GameResult: React.FC<GameResultProps> = ({
   eliminatedPlayers,
   civilianWord,
   undercoverWord,
+  mrWhiteWinType,
   onPlayAgain,
   onNewGame,
 }) => {
@@ -53,7 +55,10 @@ const GameResult: React.FC<GameResultProps> = ({
       case "mr-white":
         return {
           title: "⚪ Mr. White Wins!",
-          message: "Mr. White successfully guessed the civilian word!",
+          message:
+            mrWhiteWinType === "guess"
+              ? "Mr. White successfully guessed the civilian word!"
+              : "Mr. White survived until the final two players!",
           emoji: "🎯",
         };
       default:
@@ -179,7 +184,7 @@ const GameResult: React.FC<GameResultProps> = ({
           </li>
           <li>
             ⚪ Mr. White wins by correctly guessing the civilian word when
-            eliminated
+            eliminated OR by surviving until only 2 players remain
           </li>
         </ul>
       </div>

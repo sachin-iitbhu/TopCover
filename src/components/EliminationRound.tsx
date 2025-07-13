@@ -10,6 +10,7 @@ interface EliminationRoundProps {
   civilianWord: string;
   mrWhiteGuess: string;
   setMrWhiteGuess: (guess: string) => void;
+  setMrWhiteWinType: (winType: "guess" | "survival" | null) => void;
 }
 
 const EliminationRound: React.FC<EliminationRoundProps> = ({
@@ -21,6 +22,7 @@ const EliminationRound: React.FC<EliminationRoundProps> = ({
   civilianWord,
   mrWhiteGuess,
   setMrWhiteGuess,
+  setMrWhiteWinType,
 }) => {
   const alivePlayers = players.filter((p) => !eliminatedPlayers.includes(p));
 
@@ -112,6 +114,7 @@ const EliminationRound: React.FC<EliminationRoundProps> = ({
     if (
       mrWhiteGuess.toLowerCase().trim() === civilianWord.toLowerCase().trim()
     ) {
+      setMrWhiteWinType("guess");
       setWinner("mr-white");
     } else {
       // Mr. White guessed wrong, check other win conditions
@@ -147,6 +150,7 @@ const EliminationRound: React.FC<EliminationRoundProps> = ({
 
     // Check if Mr. White wins (if only Mr. White and one other person remain)
     if (remainingPlayers.length === 2 && remainingMrWhite.length === 1) {
+      setMrWhiteWinType("survival");
       setWinner("mr-white");
       setGameState("result");
       return;
