@@ -1,4 +1,5 @@
 import { useState } from "react";
+import logo from "/logo2.svg";
 import "./App.css";
 import GameSetup from "./components/GameSetup";
 import WordDistribution from "./components/WordDistribution";
@@ -85,17 +86,21 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>🎯 TopCover</h1>
-        <p>Social Deduction Game</p>
-        <button
-          onClick={() => setShowLeaderboard(true)}
-          className="leaderboard-btn"
-          type="button"
-        >
-          🏆 Leaderboard
-        </button>
+        <h1>
+          <img
+            src={logo}
+            alt="TopCover Logo"
+            style={{
+              width: "50px",
+              height: "50px",
+              marginRight: "1rem",
+              verticalAlign: "middle",
+            }}
+          />
+          TopCover
+        </h1>
+        <p>The Ultimate Social Deduction Game</p>
       </header>
-
       <main className="game-container">
         {gameState === "setup" && (
           <GameSetup
