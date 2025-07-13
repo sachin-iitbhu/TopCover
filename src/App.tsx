@@ -86,6 +86,12 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
+        <button
+          className="leaderboard-btn"
+          onClick={() => setShowLeaderboard(true)}
+        >
+          🏆 Leaderboard
+        </button>
         <h1>
           <img
             src={logo}
