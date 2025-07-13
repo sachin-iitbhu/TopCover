@@ -34,6 +34,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Center children horizontally */
+  padding: 0 1rem; /* Add some padding on the sides */
 }
 
 .app-header {
@@ -41,7 +43,10 @@ body {
   padding: 2rem 1rem;
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   box-shadow: var(--shadow);
-  position: relative;
+  width: 100%; /* Ensure header takes full width of its container */
+  max-width: 900px; /* Match the max-width of the game container */
+  border-radius: 0 0 16px 16px; /* Optional: round bottom corners */
+  margin-bottom: clamp(1.5rem, 4vw, 3rem); /* Space between header and game container */
 }
 
 .app-header h1 {
@@ -80,31 +85,30 @@ body {
 
 .game-container {
   flex: 1;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+  max-width: 900px;
   width: 100%;
+  /* Remove margin: 0 auto and padding, as it's handled by .app and header now */
 }
 
 /* Game Setup Styles */
 .game-setup {
   background: var(--surface);
   border-radius: 16px;
-  padding: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem); /* Fluid padding */
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
 }
 
 .game-setup h2 {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased margin */
   text-align: center;
   color: var(--accent-color);
 }
 
 .setup-section {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
+  margin-bottom: 2.5rem; /* Increased margin */
+  padding: clamp(1rem, 3vw, 2rem); /* Fluid padding */
   background: var(--surface-light);
   border-radius: 12px;
   border: 1px solid var(--border);
@@ -263,7 +267,7 @@ body {
 .word-distribution {
   background: transparent;
   border-radius: 16px;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem); /* Fluid padding */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -440,21 +444,21 @@ body {
 .elimination-round {
   background: var(--surface);
   border-radius: 16px;
-  padding: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem); /* Fluid padding */
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
 }
 
 .elimination-round h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Adjusted margin */
   text-align: center;
   color: var(--danger-color);
 }
 
 .instruction {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased margin */
   color: var(--text-secondary);
   font-size: 1.1rem;
 }
@@ -472,14 +476,14 @@ body {
 .voting-area {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 1.5rem; /* Increased gap */
+  margin-bottom: 2.5rem; /* Increased margin */
 }
 
 .player-vote-card {
   background: var(--surface-light);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   border: 1px solid var(--border);
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -576,8 +580,8 @@ body {
 .voting-summary {
   background: var(--surface-light);
   border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 2rem; /* Increased padding */
+  margin-bottom: 2.5rem; /* Increased margin */
   border: 1px solid var(--border);
 }
 
@@ -600,7 +604,7 @@ body {
 
 .finish-voting-btn {
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1.25rem 2rem; /* Increased padding */
   background: var(--danger-color);
   color: white;
   border: none;
@@ -609,7 +613,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased margin */
 }
 
 .finish-voting-btn:hover:not(:disabled) {
@@ -626,7 +630,7 @@ body {
 .eliminated-players {
   background: var(--surface-light);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   border: 1px solid var(--border);
 }
 
@@ -648,85 +652,87 @@ body {
 .voting-result {
   background: var(--surface);
   border-radius: 16px;
-  padding: 2rem;
+  padding: clamp(2rem, 5vw, 3rem); /* Fluid padding */
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
   text-align: center;
 }
 
 .voting-result h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.2rem; /* Increased font size */
+  margin-bottom: 2.5rem; /* Increased margin */
   color: var(--danger-color);
 }
 
 .voting-result p {
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Increased margin */
   color: var(--text-secondary);
 }
 
 .action-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem; /* Increased gap */
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 2.5rem; /* Increased margin */
 }
 
-.confirm-btn {
-  padding: 1rem 2rem;
-  background: var(--danger-color);
-  color: white;
-  border: none;
+.confirm-btn,
+.reset-btn {
+  padding: 1.25rem 2.5rem; /* Increased padding */
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.confirm-btn {
+  background: var(--danger-color);
+  color: white;
+  border: 2px solid transparent;
 }
 
 .confirm-btn:hover {
   background: #dc2626;
+  transform: translateY(-2px);
 }
 
 .reset-btn {
-  padding: 1rem 2rem;
   background: var(--surface-light);
   color: var(--text-primary);
   border: 2px solid var(--border);
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .reset-btn:hover {
   background: var(--background);
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
 }
 
 /* Mr. White Guess Styles */
 .mr-white-guess {
   background: var(--surface);
   border-radius: 16px;
-  padding: 2rem;
+  padding: clamp(2rem, 5vw, 3rem); /* Fluid padding */
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
   text-align: center;
 }
 
 .mr-white-guess h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.2rem; /* Increased font size */
+  margin-bottom: 2.5rem; /* Increased margin */
   color: var(--warning-color);
 }
 
 .mr-white-guess p {
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Increased margin */
   color: var(--text-secondary);
 }
 
 .guess-input {
-  margin: 2rem 0;
+  margin: 2.5rem 0; /* Increased margin */
 }
 
 .guess-input label {
@@ -757,7 +763,7 @@ body {
 .game-result {
   background: var(--surface);
   border-radius: 16px;
-  padding: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem); /* Fluid padding */
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
 }
@@ -765,7 +771,7 @@ body {
 .winner-announcement {
   text-align: center;
   margin-bottom: 3rem;
-  padding: 2rem;
+  padding: clamp(2rem, 5vw, 3rem); /* Fluid padding */
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   border-radius: 16px;
 }
@@ -788,12 +794,12 @@ body {
 }
 
 .game-summary {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased margin */
 }
 
 .game-summary h3 {
   font-size: 1.8rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased margin */
   text-align: center;
   color: var(--accent-color);
 }
@@ -801,8 +807,8 @@ body {
 .words-revealed {
   background: var(--surface-light);
   border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 2rem; /* Increased padding */
+  margin-bottom: 2.5rem; /* Increased margin */
   border: 1px solid var(--border);
 }
 
@@ -830,14 +836,14 @@ body {
 .players-breakdown {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 1.5rem; /* Increased gap */
+  margin-bottom: 2.5rem; /* Increased margin */
 }
 
 .role-group {
   background: var(--surface-light);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   border: 1px solid var(--border);
 }
 
@@ -872,8 +878,8 @@ body {
 .elimination-order {
   background: var(--surface-light);
   border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 2rem; /* Increased padding */
+  margin-bottom: 2.5rem; /* Increased margin */
   border: 1px solid var(--border);
 }
 
@@ -898,16 +904,16 @@ body {
 
 .game-actions {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* Increased margin */
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem; /* Increased gap */
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .play-again-btn,
 .new-game-btn {
-  padding: 1rem 2rem;
+  padding: 1.25rem 2.5rem; /* Increased padding */
   color: white;
   border: none;
   border-radius: 12px;
@@ -935,7 +941,7 @@ body {
 .game-rules-reminder {
   background: var(--surface-light);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   border: 1px solid var(--border);
 }
 
