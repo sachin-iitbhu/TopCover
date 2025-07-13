@@ -8,9 +8,16 @@ import GameResult from "./components/GameResult";
 import Leaderboard from "./components/Leaderboard";
 import type { GameState, Player, Role } from "./types/game";
 
+const initialPlayers: Player[] = [
+  { id: crypto.randomUUID(), name: "Sachin", role: "civilian" },
+  { id: crypto.randomUUID(), name: "Ashish", role: "civilian" },
+  { id: crypto.randomUUID(), name: "Amit", role: "civilian" },
+  { id: crypto.randomUUID(), name: "Sagar", role: "civilian" },
+];
+
 function App() {
   const [gameState, setGameState] = useState<GameState>("setup");
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [players, setPlayers] = useState<Player[]>(initialPlayers);
   const [numUndercovers, setNumUndercovers] = useState(1);
   const [numMrWhite, setNumMrWhite] = useState(1);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
@@ -26,7 +33,7 @@ function App() {
 
   const resetGame = () => {
     setGameState("setup");
-    setPlayers([]);
+    setPlayers(initialPlayers);
     setCurrentPlayerIndex(0);
     setCivilianWord("");
     setUndercoverWord("");
@@ -99,7 +106,7 @@ function App() {
 
         {gameState === "discussion" && (
           <DiscussionRound
-            players={players}
+            players={players.filter((p) => !eliminatedPlayers.includes(p))}
             onDiscussionComplete={() => setGameState("elimination")}
             onSkipDiscussion={() => setGameState("elimination")}
           />

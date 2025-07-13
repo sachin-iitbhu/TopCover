@@ -116,11 +116,12 @@ const EliminationRound: React.FC<EliminationRoundProps> = ({
     ) {
       setMrWhiteWinType("guess");
       setWinner("mr-white");
+      setGameState("result");
     } else {
-      // Mr. White guessed wrong, check other win conditions
+      // Mr. White guessed wrong, so they are just eliminated.
+      // The game continues if other win conditions aren't met.
       checkWinConditions([...eliminatedPlayers, eliminatedPlayer!]);
     }
-    setGameState("result");
   };
 
   const checkWinConditions = (currentEliminatedPlayers: Player[]) => {
@@ -133,33 +134,51 @@ const EliminationRound: React.FC<EliminationRoundProps> = ({
     const remainingMrWhite = remainingPlayers.filter(
       (p) => p.role === "mr-white"
     );
+    const remainingCivilians = remainingPlayers.filter(
+      (p) => p.role === "civilian"
+    );
 
-    // Check if a civilian was eliminated - game ends, undercovers win
-    if (eliminatedPlayer?.role === "civilian") {
+    // Undercovers win if they are equal to or outnumber civilians, and Mr. White is not the sole non-undercover.
+    if (
+      remainingUndercovers.length > 0 &&
+      remainingUndercovers.length >= remainingCivilians.length &&
+      (remainingMrWhite.length === 0 || remainingPlayers.length > 2)
+    ) {
       setWinner("undercover");
       setGameState("result");
       return;
     }
 
-    // Check if all undercovers AND Mr. White are eliminated - civilians win
+    // Civilians win if all Undercovers and Mr. White are eliminated.
     if (remainingUndercovers.length === 0 && remainingMrWhite.length === 0) {
       setWinner("civilian");
       setGameState("result");
       return;
     }
 
-    // Check if Mr. White wins (if only Mr. White and one other person remain)
-    if (remainingPlayers.length === 2 && remainingMrWhite.length === 1) {
+    // Mr. White wins by survival if they are one of the last two players.
+    if (
+      remainingPlayers.length === 2 &&
+      remainingMrWhite.length === 1 &&
+      remainingUndercovers.length === 0
+    ) {
       setMrWhiteWinType("survival");
       setWinner("mr-white");
       setGameState("result");
       return;
     }
 
-    // Game continues - return to discussion for next round
+    // If no win condition is met, the game continues.
     setShowVotingResult(false);
     setEliminatedPlayer(null);
-    setVotes({});
+    // Reset votes for the next round
+    const newVotes: { [playerName: string]: number } = {};
+    players
+      .filter((p) => !currentEliminatedPlayers.includes(p))
+      .forEach((player) => {
+        newVotes[player.name] = 0;
+      });
+    setVotes(newVotes);
     setGameState("discussion");
   };
 

@@ -261,161 +261,179 @@ body {
 
 /* Word Distribution Styles */
 .word-distribution {
-  background: var(--surface);
+  background: transparent;
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .word-distribution h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--accent-color);
-}
-
-.player-progress {
-  background: var(--surface-light);
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.current-player-card {
-  background: var(--surface-light);
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  border: 1px solid var(--border);
-}
-
-.current-player-card h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  margin-bottom: 0;
   color: var(--text-primary);
+  text-shadow: 0 0 8px var(--primary-color);
 }
 
-.instruction {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
-}
-
-.word-reveal {
-  text-align: center;
-}
-
-.word-reveal .warning {
-  background: var(--warning-color);
-  color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  font-weight: 600;
-}
-
-.reveal-btn {
-  padding: 1rem 2rem;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
-}
-
-.reveal-btn:hover {
-  background: #4f46e5;
-  transform: translateY(-2px);
-}
-
-.word-display {
-  text-align: center;
-}
-
-.role-badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: var(--primary-color);
-  color: white;
+.player-turn-indicator {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1.5rem;
   border-radius: 20px;
   font-weight: 600;
-  margin-bottom: 2rem;
-}
-
-.word-card {
-  background: var(--background);
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  border: 2px solid var(--border);
-}
-
-.mr-white-message h3 {
-  color: var(--danger-color);
-  margin-bottom: 1rem;
-}
-
-.word-content h3 {
-  margin-bottom: 1rem;
   color: var(--text-secondary);
+  border: 1px solid var(--border);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
 }
 
-.word {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--accent-color);
-  padding: 1rem;
-  background: var(--surface-light);
+.intelligence-dossier {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(30, 41, 59, 0.6);
   border-radius: 12px;
-  border: 2px solid var(--accent-color);
+  border: 1px solid var(--border);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.word-instructions {
-  background: var(--surface-light);
-  padding: 1rem;
+.dossier-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dossier-header h3 {
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.dossier-content {
+  text-align: center;
+}
+
+.classified-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid var(--warning-color);
+  padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 2rem;
 }
 
-.word-instructions p {
-  margin-bottom: 0.5rem;
-  color: var(--text-secondary);
+.classified-warning p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--warning-color);
+  font-weight: 600;
 }
 
-.next-btn {
+.access-button {
   padding: 1rem 2rem;
-  background: var(--accent-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px -5px var(--primary-color);
 }
 
-.next-btn:hover {
-  background: #059669;
-  transform: translateY(-2px);
+.access-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 25px -5px var(--primary-color);
 }
 
-.progress-bar {
-  height: 8px;
-  background: var(--surface-light);
-  border-radius: 4px;
-  overflow: hidden;
+.intel-revealed {
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%);
-  transition: width 0.3s ease;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.role-display {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.secret-word-container {
+  background: var(--background);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 2px dashed var(--accent-color);
+  margin-bottom: 2rem;
+}
+
+.secret-word-container h3 {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.secret-word {
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  font-weight: 700;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-color);
+}
+
+.mr-white-instructions {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.next-agent-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.next-agent-btn {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--accent-color) 0%, #15803d 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px -5px var(--accent-color);
+}
+
+.next-agent-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 25px -5px var(--accent-color);
+}
+
+.word-distribution .progress-bar {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Removing old styles that are replaced by the new dossier design */
+.word-distribution .player-progress,
+.word-distribution .current-player-card,
+.word-distribution .reveal-btn,
+.word-distribution .word-card,
+.word-distribution .next-btn {
+  display: none;
 }
 
 /* Elimination Round Styles */

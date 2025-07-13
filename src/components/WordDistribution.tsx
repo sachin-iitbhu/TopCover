@@ -33,20 +33,17 @@ const WordDistribution: React.FC<WordDistributionProps> = ({
   };
 
   const getWordToShow = () => {
-    if (currentPlayer.role === "mr-white") {
-      return "You are Mr. White - You have no word!";
-    }
     return currentPlayer.word || "";
   };
 
   const getRoleDescription = () => {
     switch (currentPlayer.role) {
       case "civilian":
-        return "👥 You are a Civilian";
+        return "Civilian";
       case "undercover":
-        return "🕵️ You are an Undercover";
+        return "Undercover";
       case "mr-white":
-        return "⚪ You are Mr. White";
+        return "Mr. White";
       default:
         return "";
     }
@@ -54,72 +51,62 @@ const WordDistribution: React.FC<WordDistributionProps> = ({
 
   return (
     <div className="word-distribution">
-      <h2>� Intelligence Brief</h2>
-
-      <div className="agent-progress">
-        Agent {currentPlayerIndex + 1} of {players.length}
+      <h2>Intelligence Brief</h2>
+      <div className="player-turn-indicator">
+        Agent {currentPlayer.name}'s Turn ({currentPlayerIndex + 1}/
+        {players.length})
       </div>
 
-      <div className="current-agent-card">
-        <h3>👋 Agent {currentPlayer.name}</h3>
-        <p className="instruction">
-          Secure the device for <strong>Agent {currentPlayer.name}</strong>
-        </p>
-
+      <div className="intelligence-dossier">
         {!isWordVisible ? (
-          <div className="intelligence-reveal">
-            <p className="security-warning">
-              🔒 Classified: Only <strong>Agent {currentPlayer.name}</strong>{" "}
-              should view this intel!
-            </p>
-            <button className="btn-primary btn-lg" onClick={showWord}>
-              👁️ Access Intelligence
-            </button>
-          </div>
+          <>
+            <div className="dossier-header">
+              <h3>Top Secret Dossier</h3>
+            </div>
+            <div className="dossier-content">
+              <div className="classified-warning">
+                <p>For Agent {currentPlayer.name}'s eyes only.</p>
+              </div>
+              <button className="access-button" onClick={showWord}>
+                Access Intelligence
+              </button>
+            </div>
+          </>
         ) : (
-          <div className="word-display">
-            <div className="role-badge">{getRoleDescription()}</div>
+          <div className="intel-revealed">
+            <div className="role-display">{getRoleDescription()}</div>
 
-            <div className="word-card">
-              {currentPlayer.role === "mr-white" ? (
-                <div className="mr-white-message">
-                  <h3>🎭 You are Mr. White!</h3>
-                  <p>
-                    You don't have a word. Listen carefully to others and try to
-                    blend in!
-                  </p>
-                </div>
-              ) : (
-                <div className="word-content">
-                  <h3>Your word is:</h3>
-                  <div className="word">{getWordToShow()}</div>
-                </div>
-              )}
+            {currentPlayer.role === "mr-white" ? (
+              <div className="secret-word-container">
+                <p className="mr-white-instructions">
+                  You have no word. Your mission is to blend in, deduce the
+                  Civilians' word, and survive.
+                </p>
+              </div>
+            ) : (
+              <div className="secret-word-container">
+                <h3>Your Secret Word Is:</h3>
+                <div className="secret-word">{getWordToShow()}</div>
+              </div>
+            )}
+
+            <div className="next-agent-container">
+              <button onClick={nextPlayer} className="next-agent-btn">
+                {currentPlayerIndex < players.length - 1
+                  ? "Pass to Next Agent"
+                  : "Proceed to Elimination"}
+              </button>
             </div>
-
-            <div className="mission-instructions">
-              <p>
-                📚 <strong>Memorize your assignment!</strong>
-              </p>
-              <p>🤫 Maintain operational security</p>
-            </div>
-
-            <button className="btn-primary btn-lg" onClick={nextPlayer}>
-              {currentPlayerIndex < players.length - 1
-                ? "➡️ Next Player"
-                : "🎯 Begin Discussion"}
-            </button>
           </div>
         )}
       </div>
-
-      <div className="mission-progress">
+      <div className="progress-bar">
         <div
           className="progress-fill"
           style={{
             width: `${((currentPlayerIndex + 1) / players.length) * 100}%`,
           }}
-        />
+        ></div>
       </div>
     </div>
   );
