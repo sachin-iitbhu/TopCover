@@ -9,10 +9,30 @@ import Leaderboard from "./components/Leaderboard";
 import type { GameState, Player, Role } from "./types/game";
 
 const initialPlayers: Player[] = [
-  { id: crypto.randomUUID(), name: "Sachin", role: "civilian" },
-  { id: crypto.randomUUID(), name: "Ashish", role: "civilian" },
-  { id: crypto.randomUUID(), name: "Amit", role: "civilian" },
-  { id: crypto.randomUUID(), name: "Sagar", role: "civilian" },
+  {
+    id: crypto.randomUUID(),
+    name: "Sachin",
+    role: "civilian",
+    isEliminated: false,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Ashish",
+    role: "civilian",
+    isEliminated: false,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Amit",
+    role: "civilian",
+    isEliminated: false,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Sagar",
+    role: "civilian",
+    isEliminated: false,
+  },
 ];
 
 function App() {
