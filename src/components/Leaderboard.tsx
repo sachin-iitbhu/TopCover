@@ -119,7 +119,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ onClose }) => {
         </div>
 
         <div className="leaderboard-actions">
-          <button className="btn-danger btn-md" onClick={handleClearData}>
+          <button className="clear-data-btn" onClick={handleClearData}>
             🗑️ Clear All Data
           </button>
         </div>

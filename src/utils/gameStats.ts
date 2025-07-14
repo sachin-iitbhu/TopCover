@@ -13,6 +13,16 @@ const POINTS = {
 
 export const saveGameRecord = (record: GameRecord): void => {
   const existingRecords = getGameRecords();
+
+  // Check if this game record already exists (prevent duplicates)
+  const isDuplicate = existingRecords.some(
+    (existing) => existing.id === record.id
+  );
+  if (isDuplicate) {
+    console.warn("Attempted to save duplicate game record:", record.id);
+    return;
+  }
+
   const updatedRecords = [record, ...existingRecords];
   localStorage.setItem(GAME_RECORDS_KEY, JSON.stringify(updatedRecords));
   updatePlayerStats(record);
@@ -63,8 +73,16 @@ export const updatePlayerStats = (record: GameRecord): void => {
     existingStat.gamesPlayed += 1;
     existingStat.totalPoints += POINTS.PARTICIPATION;
 
-    // Check if this player won
-    const isWinner = record.winner === player.role;
+    // Check if this player won - they must be part of the winning team AND not eliminated
+    // Exception: Mr. White can win even if eliminated (by guessing the word)
+    const isPlayerOnWinningTeam = record.winner === player.role;
+    const isPlayerAlive = !player.isEliminated;
+    const isMrWhiteWinByGuess =
+      player.role === "mr-white" && record.winner === "mr-white";
+
+    const isWinner =
+      isPlayerOnWinningTeam && (isPlayerAlive || isMrWhiteWinByGuess);
+
     if (isWinner) {
       existingStat.wins += 1;
 

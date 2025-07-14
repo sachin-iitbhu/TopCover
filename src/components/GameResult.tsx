@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import type { Player, Role, GameRecord } from "../types/game";
 import { saveGameRecord } from "../utils/gameStats";
 
@@ -23,8 +23,12 @@ const GameResult: React.FC<GameResultProps> = ({
   onPlayAgain,
   onNewGame,
 }) => {
+  const hasRecordedGame = useRef(false);
+
   // Save game record when component mounts
   useEffect(() => {
+    if (hasRecordedGame.current) return;
+
     const gameRecord: GameRecord = {
       id: Date.now().toString(),
       date: new Date(),
@@ -36,6 +40,7 @@ const GameResult: React.FC<GameResultProps> = ({
     };
 
     saveGameRecord(gameRecord);
+    hasRecordedGame.current = true;
   }, [players, winner, eliminatedPlayers.length, civilianWord, undercoverWord]);
   const getWinnerMessage = () => {
     switch (winner) {
